@@ -12,6 +12,12 @@ import type { NextConfig } from 'next';
  */
 const nextConfig: NextConfig = {
   trailingSlash: true,
+
+  // The work index moved to /. Anything still pointing at /work follows it,
+  // permanently. /work/[slug] is untouched.
+  async redirects() {
+    return [{ source: '/work', destination: '/', permanent: true }];
+  },
 };
 
 export default nextConfig;

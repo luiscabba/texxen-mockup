@@ -34,7 +34,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
   return (
     <article>
       <header className="phead art">
-        <Link href="/work/" className="back t-ui">&larr; work</Link>
+        <Link href="/" className="back t-ui">&larr; the works</Link>
         <h1>{project.title}</h1>
         <p className="dek">{project.dek}</p>
 

@@ -10,7 +10,7 @@ export default function NotFound() {
         The page you asked for is not on the site.
       </p>
       <p style={{ marginTop: 28 }}>
-        <Link href="/work/" className="cta t-ui">see the work</Link>
+        <Link href="/" className="cta t-ui">see the work</Link>
       </p>
     </div>
   );

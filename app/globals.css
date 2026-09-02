@@ -233,22 +233,6 @@ figure { margin: 0; }
   .brief p { font-size: 1.0625rem; }
 }
 
-/* home ------------------------------------------------------------------- */
-.homehero { padding: 120px 0 96px; text-align: center; position: relative; overflow: hidden; }
-.homehero .mk { font-family: var(--font-mark); font-size: clamp(3.5rem, 17vw, 13rem); line-height: .9; margin: 0; position: relative; z-index: 1; }
-.homehero .line { font-family: var(--font-display); font-size: clamp(1.5rem, 3.4vw, 2.6rem); line-height: 1.2; letter-spacing: -.02em; max-width: 20ch; margin: 40px auto 0; text-wrap: balance; position: relative; z-index: 1; }
-.homehero .sub { color: var(--color-muted); font-size: 1.0625rem; line-height: 1.6; max-width: 46ch; margin: 24px auto 0; position: relative; z-index: 1; }
-.homehero .go { margin-top: 40px; position: relative; z-index: 1; }
-.pipeline { display: flex; justify-content: center; gap: 0; align-items: center; flex-wrap: wrap; padding: 0 0 110px; }
-.pipeline .step { display: flex; align-items: center; padding: 0 22px; }
-.pipeline .step .nm { font-family: var(--font-ui); font-size: .75rem; letter-spacing: .08em; text-transform: uppercase; color: var(--color-muted); }
-.pipeline .dash { width: 56px; height: 1px; background: var(--color-hairline); }
-@media (max-width: 760px) {
-  .homehero { padding: 64px 0 56px; }
-  .pipeline .dash { display: none; }
-  .pipeline .step { padding: 14px 18px; }
-}
-
 @media (prefers-reduced-motion: reduce) {
   * { animation: none !important; transition: none !important; }
 }
