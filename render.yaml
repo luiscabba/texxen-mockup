@@ -1,7 +1,0 @@
-services:
-  - type: web
-    runtime: static
-    name: texxen
-    buildCommand: npm install && npm run build
-    staticPublishPath: ./out
-    autoDeploy: true

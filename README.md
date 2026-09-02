@@ -1,8 +1,8 @@
 # texxen
 
 Marketing site for texxen. Next.js 15 App Router, React 19, TypeScript strict,
-Tailwind CSS v4 (tokens in `@theme` in `app/globals.css`). Static export, served
-by Render out of `out/`.
+Tailwind CSS v4 (tokens in `@theme` in `app/globals.css`). Deployed on Vercel,
+which builds and runs Next natively.
 
 ## Local
 
@@ -19,12 +19,14 @@ with a stated measurement window, and a `card.height` that differs from its
 neighbours so the grid stays uneven. A project whose services include `systems`
 or `intel` needs a `systemDiagram`.
 
-## Static export
+## Deploys
 
-`next.config.ts` sets `output: 'export'`, `images: { unoptimized: true }` and
-`trailingSlash: true`. Consequences: no route handlers, no server actions, no
-ISR, no image optimization, and every dynamic route needs
-`generateStaticParams()` plus `export const dynamicParams = false`.
+Vercel builds on every push to `main`. `next.config.ts` sets only
+`trailingSlash: true`, since every internal `Link` is written with one.
+
+`/work/[slug]` keeps `generateStaticParams()` and `export const dynamicParams
+= false`. Neither is required by Vercel, but together they prerender both
+project pages at build time and 404 anything that is not a real slug.
 
 Always run `npm run build` before committing.
 
