@@ -57,7 +57,7 @@ export type Project = {
   /** The plate directly under the header. */
   hero: Media | { blank: true; caption: string };
   /** Required on any project whose services include systems or intel. */
-  systemDiagram?: 'case-pipeline';
+  systemDiagram?: 'case-pipeline' | 'two-sided-model';
   /** At least three, each with the measurement window stated honestly.
    *  A project without numbers does not go on the site. */
   outcomes: { value: string; label: string; window: string }[];
@@ -197,6 +197,84 @@ export const projects: Project[] = [
       { role: 'Client', name: 'DaddyDappy' },
     ],
     card: { height: 300, bg: '#101711', fg: '#EAF3EC', cover: '/projects/daddydappy/laptop-mockup.jpg' },
+  },
+  {
+    slug: 'smart-uae',
+    title: 'Smart UAE',
+    industry: 'Enterprise software',
+    year: '2026',
+    services: ['brand', 'web', 'intel', 'systems'],
+    stageWeeks: [3, 2, 2, 0, 0],
+    live: false,
+    status: 'paused at the client\u2019s call, pending first validation',
+    outcome: 'A mark that collapsed in one ink, corrected on its own paths, and a bilingual system built out to 21 artboards.',
+    dek: 'A supplied mark corrected on its own geometry, then a bilingual identity system built out from it, for a Dubai company selling software to government and originating its own ventures.',
+    brief: [
+      'Smart UAE was licensed in Dubai in 2025 to do two different things under one name. One side sells and implements software for government entities, working against their stated requirements. The other originates its own ventures, pitches them to investors to fund or acquire, then builds and runs whatever gets backed. Neither side funds the other, and the first government delivery is still ahead of it.',
+      'What existed at the start was a company, a trade licence and a supplied logo. The logo was a three band flame whose bands overlapped, so it read by tonal difference and merged into a single unreadable mass the moment it was printed in one colour. There was no wordmark, no lockup, and no agreement on which of the two businesses the company was being built toward.',
+    ],
+    hero: {
+      src: '/projects/smart-uae/hero.jpg',
+      caption: 'The corrected mark in the three inks it ships in: inverse and accent on the dark ground, ink on the light field.',
+    },
+    stageBlocks: [
+      {
+        stage: 'diagnose',
+        heading: 'Settling which business the brand was for',
+        body: 'The two sides were worked through with the founder before anything was drawn, because they imply different brands. What came back is that they operate separately and neither funds the other, which is what made a single brand defensible rather than assumed. The trade licence was read alongside the model, so the scope of each side got fixed against what the entity is permitted to do rather than what it intends to do.',
+        shipped: [
+          'Foundation brief with a ten item open questions register',
+          'Category audit of UAE govtech vendors and Gulf venture builders',
+          'Positioning: the operator, where the product is duration of responsibility',
+          'Licence and activity scope read against the stated model',
+        ],
+        media: [],
+      },
+      {
+        stage: 'design',
+        heading: 'One mark, corrected rather than replaced',
+        body: 'A from scratch replacement was drawn first and turned down: it did not read as the client\u2019s logo, which is a fair objection to a mark he already owned. So the correction was made by boolean subtraction on his own paths, cutting a gap of one sixth of band depth where each band meets the one above it, and leaving the 19.65 degree angle and the 3.0122:1 band proportion exactly as drawn. Everything after that scales from one module, the cap height of the wordmark, which is what lets the horizontal and stacked lockups each hold at their own minimum size instead of one being a shrunken version of the other.',
+        shipped: [
+          'Corrected single colour master, legible flat at 18px against a published 24px minimum',
+          'Wordmark in IBM Plex Serif, with horizontal and stacked lockups measured from cap height',
+          'Colour and elevation system on four dark grounds, every pair checked against WCAG 2.1',
+          'Type scale across Latin and Arabic, derived from font metrics rather than matched by eye',
+        ],
+        media: [
+          { src: '/projects/smart-uae/mark-construction.jpg', caption: 'The construction table and the single ink size ladder, showing the mark holding as three separate bands from 16px upward.' },
+          { src: '/projects/smart-uae/lockups.jpg', caption: 'Horizontal and stacked lockups, with the construction diagram placing the symbol by its area centroid on the cap height midline.' },
+          { src: '/projects/smart-uae/typography-bilingual.jpg', caption: 'IBM Plex specimens across Serif, Sans, Sans Arabic and Mono, with the registered Arabic name set in the same superfamily.' },
+          { src: '/projects/smart-uae/colour-system.jpg', caption: 'The twelve colour palette with every pairing listed against its measured contrast ratio and WCAG grade.' },
+        ],
+      },
+      {
+        stage: 'build',
+        heading: 'The files, and a canvas to argue from',
+        body: 'Every file was checked against a written spec before it left: no opacity, no strokes, no transforms, tight bounds, and each one legible in a single ink at the minimum size stated for it. The canvas carries the same system as artboards that can be panned through in a meeting, and it keeps the rejected direction on its own page, so a decision already taken can still be seen rather than only asserted.',
+        shipped: [
+          '14 identity files, each verified against the written spec',
+          '21 canvas artboards across five pages',
+          'Website design system and a five route sitemap',
+          'Discussion agenda and decision cards for the client meeting',
+        ],
+        media: [
+          { src: '/projects/smart-uae/misuse-rules.jpg', caption: 'Three misuse cases, each stating what it breaks: rotation, stretching, and gradient or metallic fill.' },
+          { src: '/projects/smart-uae/faceted-mark.jpg', caption: 'The faceted mark, readmitted for large format only, on a ramp derived from the accent rather than five separately picked golds.' },
+        ],
+      },
+    ],
+    systemDiagram: 'two-sided-model',
+    outcomes: [
+      { value: '14', label: 'identity files delivered and verified against a written spec: no opacity, no strokes, no transforms, each legible in one ink at its stated minimum', window: 'delivered September 2026' },
+      { value: '21', label: 'canvas artboards across five pages: identity, applied system, structure, explorations and the client discussion', window: 'delivered September 2026' },
+      { value: '18', label: 'type scale steps specified across Latin and Arabic, derived from font metrics rather than matched by eye', window: 'specified September 2026' },
+      { value: '2', label: 'competing colour and type directions specified in full, with the rejected one kept on the canvas', window: 'September 2026' },
+    ],
+    credits: [
+      { role: 'Brand strategy and design', name: 'Luis Cabb' },
+      { role: 'Client', name: 'Smart UAE Informationtech Est.' },
+    ],
+    card: { height: 360, bg: '#0A1524', fg: '#EAEFF5', cover: '/projects/smart-uae/mark-on-ground.jpg' },
   },
 ];
 
