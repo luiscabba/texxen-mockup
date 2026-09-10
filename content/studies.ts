@@ -18,6 +18,8 @@ export type Figure = {
 /** A section is a run of paragraphs and figure groups, in reading order. */
 export type Block =
   | { t: 'p'; text: string }
+  /** The at-a-glance figure, placed in the narrative rather than the header. */
+  | { t: 'glance' }
   | { t: 'fig'; layout: 'wide' | 'pair' | 'phones'; items: Figure[] };
 
 export type Study = {
@@ -28,7 +30,7 @@ export type Study = {
   attribution: string;
   /** One sentence of standfirst, never two. */
   standfirst: string;
-  /** The at-a-glance panel: one number that matters. */
+  /** One number that matters. Rendered wherever a 'glance' block sits. */
   glance: { value: string; label: string; note: string };
   /** Four fields, no more. */
   meta: { k: string; v: string }[];
@@ -67,6 +69,7 @@ export const studies: Study[] = [
           { t: 'fig', layout: 'wide', items: [
             { src: '/studies/openci/cap-map-national.jpg', caption: 'Fig. 1. 835 of the 978 field agents, live on the map. Staging environment, mock data.', w: 1000, h: 550 },
           ] },
+          { t: 'glance' },
           { t: 'p', text: 'An investigation is a field job. Someone has to stand at an address, speak to a neighbour, photograph a house and form a judgement about whether a borrower is who and where they say they are. Under S.P. Madrid’s operations, 978 of them work across the country at the same time.' },
           { t: 'p', text: 'The moment the investigator leaves the office, the operation goes blind. It stays blind until paperwork comes back, sometimes days later, and what comes back is a description of the visit rather than the visit itself.' },
           { t: 'p', text: 'Blindness of that size does not stay a management inconvenience. It becomes a credibility problem, because a recorded visit and an actual visit look identical on paper. The operation could not reliably separate a slow route from a route that was never driven.' },
