@@ -27,7 +27,10 @@ export const slides: Slide[] = [
     name: 'OpenCI',
     line: 'The field data collection infrastructure a credit investigation operation runs on.',
     status: 'In production since [year] · PH, Dubai, Singapore',
-    cover: { caption: '[CASE STUDY COVER · 16:6.4 · cap-map-national, the fieldman locations map · Q44]' },
+    cover: {
+      src: '/studies/openci/cap-map-national.jpg',
+      caption: '835 of the 978 field agents, live on the map. Staging environment, mock data.',
+    },
     disclosure:
       'Built for and run at S.P. Madrid, in the same group. Related party. Every cover on this carousel is the same operation, so the line travels with every slide, not with the set.',
     href: '/studies/openci/',

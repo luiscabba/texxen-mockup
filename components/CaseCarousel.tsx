@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
+import Image from 'next/image';
 import Link from 'next/link';
 import { slides, productRail, record } from '@/content/caseStudies';
 
@@ -66,14 +67,17 @@ export default function CaseCarousel() {
       </div>
 
       <div className="h5cover" key={s.name} aria-live="polite">
-        <span style={{ position: 'absolute', left: 28, top: 24, display: 'flex', gap: 10 }}>
-          <span style={{ display: 'inline-block', width: 132, height: 14, background: 'var(--color-faint)' }} />
-          <span style={{ display: 'inline-block', width: 82, height: 14, background: 'var(--color-faint)' }} />
-        </span>
-        <span className="t-meta brk" style={{ fontSize: 12, textAlign: 'center', padding: '0 40px' }}>
-          {s.cover.caption}
-        </span>
+        {s.cover.src ? (
+          <Image src={s.cover.src} alt={s.cover.caption} fill sizes="(max-width: 760px) 100vw, 1000px" style={{ objectFit: 'cover' }} priority />
+        ) : (
+          <span className="t-meta brk" style={{ fontSize: 12, textAlign: 'center', padding: '0 40px' }}>
+            {s.cover.caption}
+          </span>
+        )}
       </div>
+      {s.cover.src ? (
+        <p className="bcap" style={{ fontSize: 12, margin: '-8px 0 0' }}>{s.cover.caption}</p>
+      ) : null}
 
       <div className="h5slidefoot">
         <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>

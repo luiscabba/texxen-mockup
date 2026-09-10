@@ -430,8 +430,16 @@ figure { margin: 0; }
 .studysec-h { display: flex; gap: 14px; align-items: baseline; color: var(--color-muted); border-bottom: 1px solid var(--color-hairline); padding-bottom: 12px; }
 .studysec-h .sn { color: var(--color-faint); }
 .pull { margin: 30px 0 0; font-family: var(--font-display); font-weight: 400; font-size: 36px; line-height: 1.14; letter-spacing: -.022em; max-width: 24ch; }
-.prose { margin-top: 26px; columns: 2; column-gap: 56px; }
-.prose p { margin: 0 0 1.1em; font-size: 17px; line-height: 1.68; break-inside: avoid-column; }
+/* One reading column so a figure can sit full width between paragraphs,
+   rather than being trapped in a text column. */
+.prose { margin-top: 26px; }
+.prose p { margin: 0 0 1.15em; font-size: 17px; line-height: 1.68; max-width: 68ch; }
+.figrun { margin: 34px 0 38px; display: grid; gap: 20px; }
+.figrun.pair { grid-template-columns: 1fr 1fr; align-items: start; }
+.figrun.phones { grid-template-columns: 1.6fr 1fr 1fr; align-items: start; }
+.figrun figure { margin: 0; }
+.figrun img { width: 100%; height: auto; border: 1px solid var(--color-hairline); border-radius: 4px; background: var(--color-surface); }
+.figrun figcaption { margin-top: 10px; font-family: var(--font-ui); font-size: 12px; line-height: 1.55; color: var(--color-muted); max-width: 62ch; }
 .resband { background: var(--color-ink); color: var(--color-paper); margin-top: 84px; padding: 72px 0; }
 .resline { margin: 0; font-family: var(--font-display); font-weight: 400; font-size: 42px; line-height: 1.12; letter-spacing: -.025em; max-width: 22ch; }
 .resbody { margin: 24px 0 0; font-size: 16px; line-height: 1.65; max-width: 72ch; opacity: .82; }
@@ -441,8 +449,8 @@ figure { margin: 0; }
 .outcomes .l { font-size: 17px; }
 .outcomes .w { color: var(--color-faint); font-size: 11px; white-space: nowrap; }
 @media (max-width: 900px) {
-  .prose { columns: 1; }
   .metarow { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .figrun.phones { grid-template-columns: 1fr 1fr; }
 }
 @media (max-width: 760px) {
   .studyname { font-size: 38px; }
@@ -452,4 +460,5 @@ figure { margin: 0; }
   .outcomes li { grid-template-columns: 1fr; }
   .outcomes .w { white-space: normal; }
   .glance { gap: 24px; }
+  .figrun.pair, .figrun.phones { grid-template-columns: 1fr; }
 }

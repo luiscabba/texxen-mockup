@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
+import Image from 'next/image';
 import { getStudy, studies } from '@/content/studies';
 import { STAGES, type Stage } from '@/content/projects';
 import { stageInk } from '@/components/ServiceMark';
@@ -112,9 +113,20 @@ export default async function Study({ params }: { params: Promise<{ slug: string
             </div>
             {sec.pull ? <p className="pull">{sec.pull}</p> : null}
             <div className="prose">
-              {sec.body.map((para, i) => (
-                <p key={i}>{para}</p>
-              ))}
+              {sec.blocks.map((b, i) =>
+                b.t === 'p' ? (
+                  <p key={i}>{b.text}</p>
+                ) : (
+                  <div key={i} className={`figrun ${b.layout}`}>
+                    {b.items.map((f) => (
+                      <figure key={f.src}>
+                        <Image src={f.src} alt={f.caption} width={f.w} height={f.h} />
+                        <figcaption>{f.caption}</figcaption>
+                      </figure>
+                    ))}
+                  </div>
+                ),
+              )}
             </div>
           </section>
         ))}
