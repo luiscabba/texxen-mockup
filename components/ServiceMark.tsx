@@ -1,4 +1,4 @@
-import type { Service } from '@/content/projects';
+import type { Service, Stage } from '@/content/projects';
 
 /**
  * The six service marks. Path data lives here and nowhere else: every mark on
@@ -13,36 +13,78 @@ export const MARK_PATH: Record<Service, string> = {
   intel: 'M7 3.5v17M17 3.5v17M7 8h10M7 12h10M7 16h10',
 };
 
-export const SERVICE: Record<Service, { name: string; ink: string; soft: string }> = {
-  brand: { name: 'brand', ink: '#C4441B', soft: '#FF6A3D' },
-  web: { name: 'web', ink: '#1F4FD8', soft: '#3D7BFF' },
-  content: { name: 'content', ink: '#B3246E', soft: '#F0479B' },
-  demand: { name: 'demand', ink: '#9A6B00', soft: '#FFC22E' },
-  systems: { name: 'systems', ink: '#0A7A55', soft: '#12D68F' },
-  intel: { name: 'intelligence', ink: '#6229C7', soft: '#9B6BFF' },
+/**
+ * Entry 23: a hue means a pipeline stage. Launch carries no hue and is drawn
+ * in ink, which is why it is absent from this map.
+ */
+export const STAGE_COLOUR: Record<Exclude<Stage, 'launch'>, { ink: string; soft: string }> = {
+  diagnose: { ink: 'var(--color-diagnose-ink)', soft: 'var(--color-diagnose-soft)' },
+  design: { ink: 'var(--color-design-ink)', soft: 'var(--color-design-soft)' },
+  build: { ink: 'var(--color-build-ink)', soft: 'var(--color-build-soft)' },
+  operate: { ink: 'var(--color-operate-ink)', soft: 'var(--color-operate-soft)' },
+};
+
+/** Ink for any stage, including launch, which is ink by rule. */
+export function stageInk(stage: Stage) {
+  return stage === 'launch' ? 'var(--color-ink)' : STAGE_COLOUR[stage].ink;
+}
+
+/** The line each service nests under. No line carries a hue of its own. */
+export const SERVICE_STAGE: Record<Service, Stage> = {
+  brand: 'design',
+  web: 'build',
+  content: 'operate',
+  demand: 'operate',
+  systems: 'operate',
+  intel: 'operate',
+};
+
+export const SERVICE: Record<Service, { name: string }> = {
+  brand: { name: 'brand' },
+  web: { name: 'web' },
+  content: { name: 'content' },
+  demand: { name: 'demand' },
+  systems: { name: 'systems' },
+  intel: { name: 'intelligence' },
 };
 
 export default function ServiceMark({
   service,
   size = 18,
   weight = 2,
-  tone = 'ink',
+  tone = 'neutral',
+  stage,
   style,
 }: {
   service: Service;
   size?: number;
   weight?: number;
-  /** soft is for fills and mark bodies only, never for type on paper */
-  tone?: 'ink' | 'soft';
+  /**
+   * Entry 23: neutral is the default and is correct almost everywhere. A mark
+   * only takes a hue when it sits inside a section about one stage, and then
+   * it takes that stage's hue, not the line's. `soft` is a fill tone: never
+   * set it as type on paper.
+   */
+  tone?: 'neutral' | 'ink' | 'soft';
+  /** Overrides the line's own stage when the mark sits in a stage section. */
+  stage?: Stage;
   style?: React.CSSProperties;
 }) {
+  const key = stage ?? SERVICE_STAGE[service];
+  const stroke =
+    tone === 'neutral'
+      ? 'currentColor'
+      : key === 'launch'
+        ? 'var(--color-ink)'
+        : STAGE_COLOUR[key][tone];
+
   return (
     <svg
       width={size}
       height={size}
       viewBox="0 0 24 24"
       fill="none"
-      stroke={SERVICE[service][tone]}
+      stroke={stroke}
       strokeWidth={weight}
       strokeLinecap="round"
       strokeLinejoin="round"

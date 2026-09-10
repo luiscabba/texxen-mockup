@@ -6,7 +6,9 @@ import ServiceMark from './ServiceMark';
  *
  * Segment width maps to weeks on the account, so every project gets its own
  * silhouette. Skipped stages collapse to a fixed narrow token with a hairline
- * outline and no fill. A live retainer never terminates: on a live project the
+ * outline and no fill. Entry 23: each segment carries its own stage hue, so
+ * the rail is the symbol rule applied along a line, and launch stays ink.
+ * A live retainer never terminates: on a live project the
  * operate segment runs off the right edge as a dashed continuation, which is
  * the two pixel decision the whole positioning rests on.
  */
@@ -28,7 +30,7 @@ export default function StageRail({ project }: { project: Project }) {
 
             if (weeks === 0) {
               return (
-                <li key={stage} className="skipped">
+                <li key={stage} className="skipped" data-stage={stage}>
                   <span className="lab t-meta">{stage}</span>
                   <div className="bar" />
                   <span className="wk">skipped</span>
@@ -42,14 +44,14 @@ export default function StageRail({ project }: { project: Project }) {
               : { flex: `${weeks} 1 0` };
 
             return (
-              <li key={stage} className={runs ? 'runs' : undefined} style={style}>
+              <li key={stage} className={runs ? 'runs' : undefined} data-stage={stage} style={style}>
                 <a href={`#stage-${stage}`} aria-current={i === 0 ? 'step' : undefined}>
                   <span className="lab t-meta">{stage}</span>
                   <div className="bar" />
                   <span className="wk">{runs ? `${weeks}wk and running` : `${weeks}wk`}</span>
                   <div className="dock">
                     {stageServices(project, stage).map((s) => (
-                      <ServiceMark key={s} service={s} size={15} weight={1.9} />
+                      <ServiceMark key={s} service={s} size={15} weight={1.9} stage={stage} tone="ink" />
                     ))}
                   </div>
                 </a>

@@ -9,19 +9,42 @@
   --color-hairline: #E2E0D8;
   --color-faint: #C2BFB5;
 
-  /* six services, ink passes 4.5:1 on paper, soft is fills and mark bodies only */
-  --color-brand-ink: #C4441B;
-  --color-brand-soft: #FF6A3D;
-  --color-web-ink: #1F4FD8;
-  --color-web-soft: #3D7BFF;
-  --color-content-ink: #B3246E;
-  --color-content-soft: #F0479B;
-  --color-demand-ink: #9A6B00;
-  --color-demand-soft: #FFC22E;
-  --color-systems-ink: #0A7A55;
-  --color-systems-soft: #12D68F;
-  --color-intel-ink: #6229C7;
-  --color-intel-soft: #9B6BFF;
+  /* Colour, entry 23 (9 September 2026): a hue means a PIPELINE STAGE, not a
+   * service line. Four stages carry a hue; launch is drawn in ink. The values
+   * are the former web, content, demand and systems tokens, unchanged, so
+   * every contrast ratio recorded against them still stands. ink passes
+   * 4.5:1 on paper; soft is fills and mark bodies only, never type on paper. */
+  --color-diagnose-ink: #8F6300;
+  --color-diagnose-soft: #FFC22E;
+  --color-design-ink: #B3246E;
+  --color-design-soft: #F0479B;
+  --color-build-ink: #1F4FD8;
+  --color-build-soft: #3D7BFF;
+  --color-operate-ink: #0A7A55;
+  --color-operate-soft: #12D68F;
+
+  /* The six service lines nest under the stages and have no hue of their own.
+   * These are aliases to the stage each line sits in, kept so existing call
+   * sites resolve: brand and web are built in design and build, the four
+   * operated lines run in operate. A mark is ink by default and only takes a
+   * hue when it sits inside a section about that stage. */
+  --color-brand-ink: var(--color-design-ink);
+  --color-brand-soft: var(--color-design-soft);
+  --color-web-ink: var(--color-build-ink);
+  --color-web-soft: var(--color-build-soft);
+  --color-content-ink: var(--color-operate-ink);
+  --color-content-soft: var(--color-operate-soft);
+  --color-demand-ink: var(--color-operate-ink);
+  --color-demand-soft: var(--color-operate-soft);
+  --color-systems-ink: var(--color-operate-ink);
+  --color-systems-soft: var(--color-operate-soft);
+  --color-intel-ink: var(--color-operate-ink);
+  --color-intel-soft: var(--color-operate-soft);
+
+  /* Retired at entry 23, kept as deprecated tokens so record surfaces that
+   * quote the old system still resolve. Never use these on a new surface. */
+  --color-deprecated-brand-orange: #C4441B;
+  --color-deprecated-intel-purple: #6229C7;
 
   --font-display: var(--f-boska), Georgia, serif;
   --font-body: var(--f-erode), Georgia, serif;
@@ -82,13 +105,27 @@ ol, ul { margin: 0; padding: 0; list-style: none; }
 .cta { display: inline-block; border: 1px solid var(--color-ink); border-radius: 999px; padding: 9px 20px; transition: background .18s, color .18s; }
 .cta:hover { background: var(--color-ink); color: var(--color-paper); }
 
-.sitefoot { border-top: 1px solid var(--color-hairline); padding: 56px 0 80px; display: flex; justify-content: space-between; align-items: flex-end; gap: 40px; flex-wrap: wrap; }
+.markblock { display: flex; flex-direction: column; align-items: center; gap: 6px; padding: 0 28px; }
+.descriptor { color: var(--color-muted); }
 
+.sitefoot { border-top: 1px solid var(--color-hairline); padding: 56px 0 72px; }
+.footcols { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 40px; align-items: start; }
+.foothead { color: var(--color-faint); margin-bottom: 12px; }
+.footp { margin: 0; font-family: var(--font-ui); font-size: .875rem; line-height: 1.6; color: var(--color-muted); }
+.footlink { border-bottom: 1px solid var(--color-hairline); transition: border-color .18s, color .18s; }
+.footlink:hover { color: var(--color-ink); border-color: var(--color-ink); }
+.relparty { margin: 48px 0 0; padding-top: 20px; border-top: 1px solid var(--color-hairline); font-family: var(--font-ui); font-size: .8125rem; line-height: 1.6; color: var(--color-muted); max-width: 72ch; }
+
+@media (max-width: 900px) {
+  .footcols { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 34px; }
+}
 @media (max-width: 760px) {
   :root { --gutter: 22px; }
   .sitenav .left, .sitenav .right a.navlink { display: none; }
-  .wordmark { font-size: 1.85rem; padding: 0 12px; }
-  .sitefoot { align-items: flex-start; }
+  .wordmark { font-size: 1.85rem; }
+  .markblock { padding: 0 12px; }
+  .descriptor { white-space: nowrap; font-size: .625rem; letter-spacing: .07em; }
+  .footcols { grid-template-columns: 1fr; }
 }
 
 /* work index ------------------------------------------------------------- */
@@ -168,6 +205,13 @@ figure { margin: 0; }
 .rail li { min-width: 0; }
 .rail .lab { display: block; color: var(--color-muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .rail .bar { height: 10px; border-radius: 2px; background: var(--color-ink); margin: 9px 0 8px; }
+/* Entry 23: the rail is the primary colour use on the site. Each segment takes
+   its stage hue, launch stays ink, and a skipped stage has no fill to colour. */
+.rail li[data-stage="diagnose"] .bar { background: var(--color-diagnose-ink); }
+.rail li[data-stage="design"] .bar { background: var(--color-design-ink); }
+.rail li[data-stage="build"] .bar { background: var(--color-build-ink); }
+.rail li[data-stage="operate"] .bar { background: var(--color-operate-ink); }
+.rail li.runs[data-stage="operate"] .bar { background: repeating-linear-gradient(90deg, var(--color-operate-ink) 0 9px, transparent 9px 15px); }
 .rail li.skipped { flex: 0 0 78px; }
 .rail li.skipped .bar { background: none; border: 1px solid var(--color-hairline); }
 .rail li.skipped .lab, .rail li.skipped .wk { color: var(--color-faint); }
@@ -236,3 +280,87 @@ figure { margin: 0; }
 @media (prefers-reduced-motion: reduce) {
   * { animation: none !important; transition: none !important; }
 }
+
+/* interim home ----------------------------------------------------------- */
+.hometop { padding: 92px 0 0; }
+.eyebrow { color: var(--color-faint); }
+.opening { margin: 22px 0 0; font-size: clamp(2.2rem, 5.2vw, 4.25rem); line-height: 1.04; letter-spacing: -.026em; max-width: 20ch; text-wrap: balance; }
+.standfirst { margin: 28px 0 0; font-size: 1.1875rem; line-height: 1.65; color: var(--color-muted); max-width: 62ch; }
+
+.record { padding: 76px 0 0; }
+.figures { display: flex; gap: 72px; margin: 20px 0 0; flex-wrap: wrap; border-top: 1px solid var(--color-ink); padding-top: 24px; }
+.figures div { display: flex; flex-direction: column; gap: 6px; }
+.fignum { font-family: var(--font-display); font-weight: 400; font-size: clamp(3rem, 7vw, 4.75rem); line-height: 1; letter-spacing: -.035em; }
+.figures dd { margin: 0; font-family: var(--font-ui); font-size: .9375rem; color: var(--color-muted); }
+.figcap { margin: 22px 0 0; font-family: var(--font-ui); font-size: .8125rem; line-height: 1.6; color: var(--color-muted); max-width: 64ch; }
+
+.routes { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; padding: 76px 0 0; }
+.routecard { display: flex; flex-direction: column; gap: 10px; border: 1px solid var(--color-hairline); border-radius: 10px; padding: 26px 24px 28px; transition: border-color .18s, transform .18s; }
+.routecard:hover { border-color: var(--color-ink); transform: translateY(-2px); }
+.routecard .k { color: var(--color-faint); }
+.routecard .t { font-family: var(--font-display); font-size: 1.4rem; line-height: 1.2; letter-spacing: -.015em; }
+.routecard .d { font-size: .9375rem; line-height: 1.55; color: var(--color-muted); }
+
+.startline { display: flex; justify-content: space-between; align-items: flex-end; gap: 40px; flex-wrap: wrap; padding: 76px 0 104px; }
+.startline p { margin: 0; font-size: 1.0625rem; line-height: 1.68; max-width: 60ch; }
+
+@media (max-width: 900px) { .routes { grid-template-columns: 1fr; } }
+@media (max-width: 760px) {
+  .hometop { padding-top: 56px; }
+  .figures { gap: 40px; }
+  .startline { padding-bottom: 72px; }
+}
+
+/* pipeline, services, company -------------------------------------------- */
+.block { padding-top: 84px; }
+.blockhead { margin: 0 0 30px; font-family: var(--font-display); font-weight: 400; font-size: 1.9rem; line-height: 1.18; letter-spacing: -.018em; }
+.subhead { margin: 0; font-family: var(--font-display); font-weight: 400; font-size: 1.5rem; line-height: 1.2; letter-spacing: -.016em; }
+.bodyp { margin: 14px 0 0; font-size: 1.0625rem; line-height: 1.7; max-width: 64ch; }
+
+.stagebar { display: flex; gap: 4px; margin: 52px 0 0; overflow: hidden; }
+.stagebar li { min-width: 0; }
+.stagebar .lab { display: block; color: var(--color-muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.stagebar .seg { display: block; height: 10px; border-radius: 2px; margin-top: 9px; background: var(--seg); }
+.stagebar .seg.runs { border-radius: 2px 0 0 2px; background: repeating-linear-gradient(90deg, var(--seg) 0 9px, transparent 9px 15px); }
+
+.pstage { padding-top: 64px; border-top: 1px solid var(--color-hairline); margin-top: 56px; }
+.pstage:first-child { border-top: none; margin-top: 0; padding-top: 68px; }
+.pstage-head { display: flex; align-items: baseline; gap: 18px; flex-wrap: wrap; }
+.pnum { font-family: var(--font-display); font-size: 2.25rem; line-height: 1; letter-spacing: -.03em; }
+.pstage-head h2 { margin: 0; font-family: var(--font-display); font-weight: 400; font-size: 2.25rem; line-height: 1; letter-spacing: -.02em; }
+.pwk { color: var(--color-muted); margin-left: auto; }
+.pwho { margin: 16px 0 0; color: var(--color-muted); font-size: 1.0625rem; line-height: 1.6; max-width: 60ch; }
+.pio { margin: 30px 0 0; display: grid; gap: 0; }
+.pio > div { display: grid; grid-template-columns: 96px minmax(0, 1fr); gap: 24px; padding: 16px 0; border-top: 1px solid var(--color-hairline); align-items: baseline; }
+.pio dt { color: var(--color-faint); }
+.pio dd { margin: 0; font-size: 1rem; line-height: 1.62; max-width: 62ch; }
+
+.wrapgrid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 34px 48px; }
+.wrapitem h3 { margin: 0; font-family: var(--font-ui); font-weight: 500; font-size: 1rem; }
+.wrapitem p { margin: 10px 0 0; color: var(--color-muted); font-size: .9375rem; line-height: 1.62; }
+.twoup { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 48px; }
+
+@media (max-width: 760px) {
+  .block { padding-top: 60px; }
+  .wrapgrid, .twoup { grid-template-columns: 1fr; gap: 30px; }
+  .pio > div { grid-template-columns: 1fr; gap: 8px; }
+  .pstage-head h2, .pnum { font-size: 1.75rem; }
+  .pwk { margin-left: 0; width: 100%; }
+  .stagebar .lab { font-size: .625rem; letter-spacing: .04em; }
+}
+
+.grouphead { margin: 0; padding-top: 16px; border-top: 3px solid var(--rule); font-family: var(--font-display); font-weight: 400; font-size: 1.75rem; line-height: 1.2; letter-spacing: -.018em; }
+.lines { margin: 34px 0 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 34px 48px; }
+.linehead { display: flex; align-items: center; gap: 10px; }
+.linehead h3 { margin: 0; font-family: var(--font-ui); font-weight: 500; font-size: 1rem; }
+.lines p { margin: 10px 0 0; color: var(--color-muted); font-size: .9375rem; line-height: 1.62; }
+.groupnote { margin: 30px 0 0; color: var(--color-muted); font-family: var(--font-ui); font-size: .8125rem; line-height: 1.6; }
+.ticks { margin: 14px 0 0; }
+.ticks li { padding: 13px 0; border-top: 1px solid var(--color-hairline); font-size: 1rem; line-height: 1.6; }
+@media (max-width: 760px) { .lines { grid-template-columns: 1fr; gap: 28px; } }
+
+.people { margin: 0; border-top: 1px solid var(--color-ink); }
+.people li { display: grid; grid-template-columns: 260px minmax(0, 1fr); gap: 24px; padding: 18px 0; border-bottom: 1px solid var(--color-hairline); align-items: baseline; }
+.people .pn { font-family: var(--font-display); font-size: 1.375rem; letter-spacing: -.015em; }
+.people .pr { color: var(--color-muted); font-size: .9375rem; line-height: 1.55; }
+@media (max-width: 760px) { .people li { grid-template-columns: 1fr; gap: 6px; } }
