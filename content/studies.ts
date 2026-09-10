@@ -18,8 +18,6 @@ export type Figure = {
 /** A section is a run of paragraphs and figure groups, in reading order. */
 export type Block =
   | { t: 'p'; text: string }
-  /** The at-a-glance figure, placed in the narrative rather than the header. */
-  | { t: 'glance' }
   | { t: 'fig'; layout: 'wide' | 'pair' | 'phones'; items: Figure[] };
 
 export type Study = {
@@ -30,8 +28,26 @@ export type Study = {
   attribution: string;
   /** One sentence of standfirst, never two. */
   standfirst: string;
-  /** One number that matters. Rendered wherever a 'glance' block sits. */
-  glance: { value: string; label: string; note: string };
+  /**
+   * The front card. One dominant figure, up to two supporting ones, and the
+   * fields the reference card cannot carry: the stages engaged and the fact
+   * that texxen still operates it.
+   */
+  card: {
+    sector: string;
+    countries: string;
+    figure: string;
+    figureLabel: string;
+    support: { value: string; label: string }[];
+    /** Plain text, slash separated on the page. No colour: the ground has it. */
+    stages: string[];
+    running: string;
+    lines: string[];
+    summary: string;
+    relatedParty: string;
+    /** Which stage hue the card takes. Operate for a study about running something. */
+    hue: 'diagnose' | 'design' | 'build' | 'operate';
+  };
   /** Four fields, no more. */
   meta: { k: string; v: string }[];
   sections: { n: string; title: string; pull?: string; blocks: Block[] }[];
@@ -49,15 +65,27 @@ export const studies: Study[] = [
     attribution: 'by texxen',
     standfirst:
       'The field data collection infrastructure a credit investigation operation runs on.',
-    glance: {
-      value: '978',
-      label: 'field agents working on the platform across S.P. Madrid operations',
-      note: '835 of them carry live location tracking. 1,642 people hold a login on the platform: field, office, quality assurance and administration.',
+    card: {
+      sector: 'Collections and credit investigation',
+      countries: 'Philippines, Dubai, Singapore',
+      figure: '978',
+      figureLabel: 'field agents working on the platform across S.P. Madrid operations',
+      support: [
+        { value: '835', label: 'carry live location tracking' },
+        { value: '1,642', label: 'hold a login: field, office, quality assurance, administration' },
+      ],
+      stages: ['diagnose', 'design', 'build', 'launch', 'operate'],
+      running: 'and running',
+      lines: ['systems', 'intelligence'],
+      summary:
+        'S.P. Madrid runs credit investigation in the field, where the office cannot see it. texxen built the capture, the command center, the configurable form and report layer and the audit engine, in that order. The record now starts at the address rather than at the desk.',
+      relatedParty:
+        'S.P. Madrid is a company in the same group as texxen, and is stated as a related party.',
+      hue: 'operate',
     },
     meta: [
       { k: 'Role', v: 'Designed, built and operated by texxen' },
       { k: 'Surface', v: 'Mobile app for iOS and Android, and a web command center' },
-      { k: 'Status', v: 'In production and in continuous development' },
       { k: 'Modules', v: 'Field capture, command center, form and report builders, audit engine' },
     ],
     sections: [
@@ -69,7 +97,6 @@ export const studies: Study[] = [
           { t: 'fig', layout: 'wide', items: [
             { src: '/studies/openci/cap-map-national.jpg', caption: 'Fig. 1. 835 of the 978 field agents, live on the map. Staging environment, mock data.', w: 1000, h: 550 },
           ] },
-          { t: 'glance' },
           { t: 'p', text: 'An investigation is a field job. Someone has to stand at an address, speak to a neighbour, photograph a house and form a judgement about whether a borrower is who and where they say they are. Under S.P. Madrid’s operations, 978 of them work across the country at the same time.' },
           { t: 'p', text: 'The moment the investigator leaves the office, the operation goes blind. It stays blind until paperwork comes back, sometimes days later, and what comes back is a description of the visit rather than the visit itself.' },
           { t: 'p', text: 'Blindness of that size does not stay a management inconvenience. It becomes a credibility problem, because a recorded visit and an actual visit look identical on paper. The operation could not reliably separate a slow route from a route that was never driven.' },

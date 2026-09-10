@@ -3,15 +3,17 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import Image from 'next/image';
 import { getStudy, studies } from '@/content/studies';
+import StudyCard from '@/components/StudyCard';
 
 /**
  * /studies/[slug], built to the slot model on the project pages canvas:
- * header and breadcrumb, identity block, meta row, the numbered narrative
- * carrying the at-a-glance figure, an ink resolution band, then the outcome.
+ * header and breadcrumb, identity block, the front card, meta row, the
+ * numbered narrative, an ink resolution band, then the outcome.
  *
- * The glance sits under the first figure rather than in the header (10
- * September): the number means nothing until the reader has seen the map it
- * counts, and above the fold it competed with the name for the same glance.
+ * The front card replaced the at-a-glance panel on 10 September: one flooded
+ * panel in the study's stage hue carrying the figure, the stages engaged and
+ * the operating claim. Status came out of the meta row with it, since the
+ * card's own line says the same thing.
  *
  * The stage rail the template calls for is deliberately omitted (10
  * September): with no published week counts it was five equal bars and four
@@ -56,6 +58,8 @@ export default async function Study({ params }: { params: Promise<{ slug: string
           <p className="studylede">{s.standfirst}</p>
         </header>
 
+        <StudyCard card={s.card} />
+
         <section className="metarow">
           {s.meta.map((m) => (
             <div key={m.k}>
@@ -76,12 +80,6 @@ export default async function Study({ params }: { params: Promise<{ slug: string
               {sec.blocks.map((b, i) =>
                 b.t === 'p' ? (
                   <p key={i}>{b.text}</p>
-                ) : b.t === 'glance' ? (
-                  <aside key={i} className="glance">
-                    <p className="gnum t-disp t-num">{s.glance.value}</p>
-                    <p className="glabel">{s.glance.label}</p>
-                    <p className="gnote">{s.glance.note}</p>
-                  </aside>
                 ) : (
                   <div key={i} className={`figrun ${b.layout}`}>
                     {b.items.map((f) => (

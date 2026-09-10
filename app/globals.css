@@ -494,3 +494,43 @@ figure { margin: 0; }
   .glance { gap: 24px; }
   .figrun.pair, .figrun.phones { grid-template-columns: 1fr; }
 }
+
+/* the study front card ---------------------------------------------------
+   A flooded panel in the stage hue the study is about. The ground carries the
+   colour, so nothing inside it does. All type is full paper: paper measures
+   5.17 on diagnose, 6.02 on design, 6.45 on build and 5.20 on operate, all
+   AA, while a dimmed tone falls to 4.19 on amber and 4.16 on green. */
+.studycard { margin-top: 30px; padding: 44px 48px 40px; color: var(--color-paper); display: flex; flex-direction: column; gap: 26px; }
+.studycard[data-hue="diagnose"] { background: var(--color-diagnose-ink); }
+.studycard[data-hue="design"] { background: var(--color-design-ink); }
+.studycard[data-hue="build"] { background: var(--color-build-ink); }
+.studycard[data-hue="operate"] { background: var(--color-operate-ink); }
+
+.sc-eyebrow { margin: 0; font-size: 11px; }
+.sc-head { display: flex; align-items: flex-end; gap: 26px; flex-wrap: wrap; }
+.sc-fig { font-size: clamp(4.5rem, 8vw, 7.375rem); line-height: .86; letter-spacing: -.04em; }
+.sc-figlabel { font-size: 19px; line-height: 1.4; max-width: 30ch; padding-bottom: 8px; }
+.sc-support { margin: 0; display: flex; gap: 40px; flex-wrap: wrap; }
+.sc-support > div { display: flex; align-items: baseline; gap: 8px; }
+.sc-support dt { font-size: 26px; line-height: 1; letter-spacing: -.02em; }
+.sc-support dd { margin: 0; font-size: 13.5px; line-height: 1.4; max-width: 26ch; }
+.sc-rule { margin: 0; border: 0; height: 1px; background: rgba(252, 252, 250, .28); }
+.sc-stages { margin: 0; font-size: 13px; letter-spacing: .1em; }
+.sc-running { opacity: .72; margin-left: 10px; }
+.sc-body { display: flex; gap: 48px; align-items: flex-start; flex-wrap: wrap; }
+.sc-summary { margin: 0; font-size: 16px; line-height: 1.62; max-width: 62ch; flex: 1 1 520px; }
+.sc-side { flex: 0 1 300px; display: flex; flex-direction: column; gap: 14px; }
+.sc-lines { margin: 0; display: flex; gap: 8px; flex-wrap: wrap; }
+.sc-lines span { font-family: var(--font-ui); font-weight: 500; font-size: 12.5px; border: 1px solid rgba(252, 252, 250, .4); border-radius: 999px; padding: 5px 12px; }
+.sc-running-line { margin: 0; font-family: var(--font-ui); font-size: 13px; line-height: 1.55; }
+.sc-rp { margin: 0; font-family: var(--font-ui); font-size: 12px; line-height: 1.55; opacity: .8; }
+
+@media (max-width: 760px) {
+  .studycard { padding: 28px 22px 30px; gap: 20px; margin-top: 22px; }
+  .sc-head { gap: 12px; }
+  .sc-figlabel { font-size: 16px; padding-bottom: 0; }
+  .sc-support { flex-direction: column; gap: 10px; }
+  .sc-stages { font-size: 11px; letter-spacing: .08em; }
+  .sc-running { display: block; margin: 4px 0 0; }
+  .sc-body { gap: 22px; }
+}

@@ -40,8 +40,8 @@ export default function Studies() {
                 {s.standfirst}
               </span>
               <span style={{ display: 'flex', alignItems: 'baseline', gap: 10, marginTop: 20 }}>
-                <span className="t-disp t-num" style={{ fontSize: 34 }}>{s.glance.value}</span>
-                <span className="bcap" style={{ fontSize: 13, maxWidth: '30ch' }}>{s.glance.label}</span>
+                <span className="t-disp t-num" style={{ fontSize: 34 }}>{s.card.figure}</span>
+                <span className="bcap" style={{ fontSize: 13, maxWidth: '30ch' }}>{s.card.figureLabel}</span>
               </span>
             </Link>
           ))}
