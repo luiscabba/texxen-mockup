@@ -382,3 +382,36 @@ figure { margin: 0; }
   .h5slidefoot { flex-direction: column; gap: 20px; }
   .h5cover { height: 200px; }
 }
+
+/* work index, as the board draws the four categories */
+.wtile { display: block; border: 1px solid var(--color-hairline); border-radius: 10px; padding: 24px 22px 26px; transition: border-color .16s, transform .16s; }
+.wtile.link:hover { border-color: var(--color-ink); transform: translateY(-2px); }
+.wtile .tname { font-family: var(--font-display); font-weight: 400; font-size: 24px; line-height: 1.15; letter-spacing: -.015em; }
+.wtile .tmeta { display: block; margin-top: 14px; font-family: var(--font-ui); font-size: 11px; letter-spacing: .04em; }
+
+/* systems register */
+.capslot { aspect-ratio: 16/10; background: var(--color-surface); border: 1px solid var(--color-hairline); display: flex; align-items: center; justify-content: center; }
+.reg-head { display: grid; grid-template-columns: 1.9fr 110px 150px; gap: 20px; padding-bottom: 8px; color: var(--color-faint); }
+.reg-head .t-meta { font-size: 10px; }
+.register { border-top: 1px solid var(--color-ink); }
+.register li { display: grid; grid-template-columns: 1.9fr 110px 150px; gap: 20px; padding: 14px 0; border-bottom: 1px solid var(--color-hairline); align-items: baseline; transition: background .16s; }
+.register li:hover { background: var(--color-surface); }
+.register .rn { display: block; font-family: var(--font-ui); font-weight: 500; font-size: 15px; }
+.register .rd { display: block; max-height: 0; overflow: hidden; opacity: 0; font-size: 13px; line-height: 1.55; color: var(--color-muted); transition: max-height .16s ease, opacity .16s ease, margin .16s ease; }
+.register li:hover .rd, .register li:focus-within .rd { max-height: 90px; opacity: 1; margin-top: 6px; }
+@media (max-width: 760px) {
+  .reg-head { display: none; }
+  .register li { grid-template-columns: 1fr; gap: 4px; }
+  .register .rd { max-height: none; opacity: 1; margin-top: 6px; }
+}
+@media (prefers-reduced-motion: reduce) { .register .rd { transition: none; } }
+
+.pbox { border: 1px solid var(--color-hairline); border-radius: 10px; padding: 26px 24px 28px; transition: transform .16s, border-color .16s; }
+.pbox:hover { transform: translateY(-2px); border-color: var(--color-faint); }
+
+.cctrl { display: inline-flex; gap: 6px; }
+.cctrl button { font-family: var(--font-ui); font-size: 13px; color: var(--color-muted); border: 1px solid var(--color-hairline); border-radius: 999px; width: 30px; height: 26px; cursor: pointer; transition: border-color .16s, color .16s; }
+.cctrl button:hover { color: var(--color-ink); border-color: var(--color-ink); }
+.h5cover { animation: ccfade 200ms ease; }
+@keyframes ccfade { from { opacity: 0; } to { opacity: 1; } }
+@media (prefers-reduced-motion: reduce) { .h5cover { animation: none; } }

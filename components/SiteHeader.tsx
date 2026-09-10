@@ -12,11 +12,11 @@ import { usePathname } from 'next/navigation';
  * boards specify. Unbuilt routes are not linked, so nothing 404s.
  */
 const NAV = [
-  { label: 'systems', href: null },
-  { label: 'products', href: null },
+  { label: 'systems', href: '/systems/' },
+  { label: 'products', href: '/products/' },
   { label: 'pipeline', href: '/pipeline/' },
   { label: 'services', href: '/services/' },
-  { label: 'work', href: null },
+  { label: 'work', href: '/work/' },
   { label: 'company', href: '/company/' },
 ];
 
