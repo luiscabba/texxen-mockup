@@ -30,7 +30,7 @@ export const slides: Slide[] = [
     cover: { caption: '[CASE STUDY COVER · 16:6.4 · cap-map-national, the fieldman locations map · Q44]' },
     disclosure:
       'Built for and run at S.P. Madrid, in the same group. Related party. Every cover on this carousel is the same operation, so the line travels with every slide, not with the set.',
-    href: '/products/',
+    href: '/studies/openci/',
   },
 ];
 

@@ -1,13 +1,17 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import { REGISTER } from '@/content/register';
 
 /**
  * /work, built from the Applications board of the same name. Four categories,
  * each named for what it is, so a reader can tell evidence from referral work
  * without reading the fine print.
  *
- * OpenCI sits under products in use and links to the products route, since its
- * own product page is not built yet.
+ * OpenCI sits under products in use and links to its case study.
+ *
+ * The twelve-systems register moved here from /systems, under the operating
+ * record: it is evidence about one account, so it belongs beside that account
+ * rather than on a route of its own. /systems and /products are gone.
  */
 
 export const metadata: Metadata = {
@@ -81,10 +85,35 @@ export default function Work() {
               The full case study, with documents and images, follows once both can be published.
               Until then the name and the twelve systems stand on their own.
             </p>
-            <p style={{ marginTop: 16 }}>
-              <Link href="/systems/" className="tlink">the twelve systems</Link>
-            </p>
           </div>
+        </div>
+
+        <div className="sec" style={{ paddingTop: 44 }}>
+          <div style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'space-between', gap: 20 }}>
+            <h3 className="sechead" style={{ margin: 0 }}>The twelve, by what each one does</h3>
+            <span className="bcap" style={{ fontSize: 12 }}>Names first. Hover a row for what it does.</span>
+          </div>
+          <div className="reg-head">
+            <span className="t-meta">System</span>
+            <span className="t-meta">In production</span>
+            <span className="t-meta">Runs in</span>
+          </div>
+          <ul className="register">
+            {REGISTER.map(([name, does]) => (
+              <li key={name}>
+                <div>
+                  <span className="rn">{name}</span>
+                  <span className="rd">{does}</span>
+                </div>
+                <span className="bcap-s t-num">since <span className="brk">[year]</span></span>
+                <span className="bcap-s">PH &middot; Dubai &middot; Singapore</span>
+              </li>
+            ))}
+          </ul>
+          <p className="bcap" style={{ fontSize: 12, marginTop: 16 }}>
+            The three applied AI systems are one entry covering three, which is how nine rows carry
+            twelve systems. Every system is described by what it does, never by a product name.
+          </p>
         </div>
       </section>
 
@@ -93,7 +122,7 @@ export default function Work() {
         <div className="g3">
           <Tile
             name="OpenCI"
-            href="/products/"
+            href="/studies/openci/"
             body="The field data collection infrastructure a credit investigation operation runs on. In production across the Philippines, Dubai and Singapore operations of S.P. Madrid, a related party."
             meta="[first outside deployment]"
           />

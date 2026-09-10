@@ -4,16 +4,20 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
 /**
- * The header exactly as every Applications board draws it: six links left in
- * muted, the active one in ink with a hairline under it; the wordmark centred
- * at 48px with the descriptor beneath; one call to action right.
+ * The header as every Applications board draws it: links left in muted, the
+ * active one in ink with a hairline under it; the wordmark centred at 48px
+ * with the descriptor beneath; one call to action right.
+ *
+ * The bar the boards drew was systems, products, pipeline, services, work,
+ * company. Studies took the systems slot and the register moved to /work under
+ * the operating record; products came out entirely. Both are deliberate
+ * departures from the boards.
  *
  * All six render whether or not the route is built, because that is what the
  * boards specify. Unbuilt routes are not linked, so nothing 404s.
  */
 const NAV = [
-  { label: 'systems', href: '/systems/' },
-  { label: 'products', href: '/products/' },
+  { label: 'studies', href: '/studies/' },
   { label: 'pipeline', href: '/pipeline/' },
   { label: 'services', href: '/services/' },
   { label: 'work', href: '/work/' },
