@@ -32,9 +32,6 @@ export type Study = {
   glance: { value: string; label: string; note: string };
   /** Four fields, no more. */
   meta: { k: string; v: string }[];
-  /** Which stages the work actually reached, and whether it still runs. */
-  stages: { diagnose: boolean; design: boolean; build: boolean; launch: boolean; operate: boolean };
-  live: boolean;
   sections: { n: string; title: string; pull?: string; blocks: Block[] }[];
   /** The ink band before the outcome. */
   resolution: { line: string; body: string };
@@ -61,8 +58,6 @@ export const studies: Study[] = [
       { k: 'Status', v: 'In production and in continuous development' },
       { k: 'Modules', v: 'Field capture, command center, form and report builders, audit engine' },
     ],
-    stages: { diagnose: true, design: true, build: true, launch: true, operate: true },
-    live: true,
     sections: [
       {
         n: '01',

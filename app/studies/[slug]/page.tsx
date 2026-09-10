@@ -3,13 +3,16 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import Image from 'next/image';
 import { getStudy, studies } from '@/content/studies';
-import { STAGES, type Stage } from '@/content/projects';
-import { stageInk } from '@/components/ServiceMark';
 
 /**
  * /studies/[slug], built to the slot model on the project pages canvas:
- * header and breadcrumb, identity block, at-a-glance panel, stage rail, meta
- * row, the numbered narrative, an ink resolution band, then the outcome.
+ * header and breadcrumb, identity block, at-a-glance panel, meta row, the
+ * numbered narrative, an ink resolution band, then the outcome.
+ *
+ * The stage rail the template calls for is deliberately omitted (10
+ * September): with no published week counts it was five equal bars and four
+ * [wk] brackets, which is decoration rather than information, and it put all
+ * four stage hues on a page whose only other colour is none.
  *
  * The same eight slots carry a product deployment and a client engagement
  * without changing shape.
@@ -57,43 +60,6 @@ export default async function Study({ params }: { params: Promise<{ slug: string
             <div className="bcap" style={{ fontSize: 15, marginTop: 10, maxWidth: '34ch' }}>{s.glance.label}</div>
           </div>
           <p className="bcap-s" style={{ maxWidth: '46ch' }}>{s.glance.note}</p>
-        </section>
-
-        <section className="railsec" aria-labelledby="stages-engaged" style={{ paddingTop: 56 }}>
-          <div className="railhead">
-            <h2 id="stages-engaged" className="t-meta">stages engaged</h2>
-            <span className="n t-num">
-              {STAGES.filter((st) => s.stages[st]).length} of 5
-            </span>
-          </div>
-          <div className="railband">
-            <ol className="rail">
-              {STAGES.map((st: Stage) => {
-                const on = s.stages[st];
-                const runs = on && st === 'operate' && s.live;
-                if (!on) {
-                  return (
-                    <li key={st} className="skipped">
-                      <span className="lab t-meta">{st}</span>
-                      <div className="bar" />
-                      <span className="wk">skipped</span>
-                    </li>
-                  );
-                }
-                return (
-                  <li key={st} className={runs ? 'runs' : undefined} data-stage={st} style={{ flex: runs ? 1.6 : 1 }}>
-                    <span className="lab t-meta">{st}</span>
-                    <div className="bar" style={runs ? undefined : { background: stageInk(st) }} />
-                    <span className="wk">{runs ? 'and running' : <span className="brk">[wk]</span>}</span>
-                  </li>
-                );
-              })}
-            </ol>
-          </div>
-          <p className="railnote">
-            Every stage was engaged and operate has no end date, so it runs off the edge. Week
-            counts per stage are not published for this account.
-          </p>
         </section>
 
         <section className="metarow">
