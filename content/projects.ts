@@ -24,6 +24,14 @@ export type Media = {
 export type Project = {
   /** URL segment: /work/[slug]. Must not collide with RESERVED_SLUGS. */
   slug: string;
+  /**
+   * Whether the project is published on the site. False keeps the entry here,
+   * written and reviewable, while it is off the index and its detail page
+   * 404s. Referral work (OKPO, DaddyDappy, Smart UAE) is unpublished under the
+   * pivot rule: referrals are still taken, but they are not the evidence the
+   * named sectors are proved with. Flipping one back is a one word change.
+   */
+  published: boolean;
   title: string;
   /** Single value, drives the industry filter on the work index. */
   industry: string;
@@ -76,6 +84,7 @@ export const RESERVED_SLUGS = ['work', 'services', 'pipeline', 'studio', 'journa
 export const projects: Project[] = [
   {
     slug: 'okpo',
+    published: false, // referral work, not evidence under the pivot
     title: 'OKPO',
     industry: 'Creator economy',
     year: '2024',
@@ -133,6 +142,7 @@ export const projects: Project[] = [
   },
   {
     slug: 'daddydappy',
+    published: false, // referral work, not evidence under the pivot
     title: 'DaddyDappy',
     industry: 'Web3',
     year: '2022',
@@ -200,6 +210,7 @@ export const projects: Project[] = [
   },
   {
     slug: 'smart-uae',
+    published: false, // referral work, not evidence under the pivot
     title: 'Smart UAE',
     industry: 'Enterprise software',
     year: '2026',
@@ -309,10 +320,18 @@ export const projects: Project[] = [
  * },
  */
 
-export const industries = [...new Set(projects.map((p) => p.industry))].sort();
+/**
+ * What the site actually shows. Every consumer reads this, never `projects`:
+ * the index, the filters, the next-project card and generateStaticParams. An
+ * unpublished project is prerendered nowhere, and dynamicParams = false turns
+ * its URL into a 404.
+ */
+export const publishedProjects = projects.filter((p) => p.published);
+
+export const industries = [...new Set(publishedProjects.map((p) => p.industry))].sort();
 
 export function getProject(slug: string) {
-  return projects.find((p) => p.slug === slug);
+  return publishedProjects.find((p) => p.slug === slug);
 }
 
 export function stagesEngaged(p: Project) {

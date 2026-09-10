@@ -2,7 +2,7 @@
 
 import { useMemo, useState } from 'react';
 import Link from 'next/link';
-import { industries, projects, type Service } from '@/content/projects';
+import { industries, publishedProjects, type Service } from '@/content/projects';
 import ServiceMark, { SERVICE } from './ServiceMark';
 
 const SERVICES = Object.keys(SERVICE) as Service[];
@@ -23,7 +23,7 @@ export default function WorkIndex() {
 
   const shown = useMemo(
     () =>
-      projects.filter((p) => {
+      publishedProjects.filter((p) => {
         const okS = bySvc.size === 0 || [...bySvc].every((s) => p.services.includes(s));
         const okI = byInd.size === 0 || byInd.has(p.industry);
         return okS && okI;
@@ -32,7 +32,7 @@ export default function WorkIndex() {
   );
 
   const cols = shown.length < 3 ? 2 : 3;
-  const columns: (typeof projects)[] = Array.from({ length: cols }, () => []);
+  const columns: (typeof publishedProjects)[] = Array.from({ length: cols }, () => []);
   shown.forEach((p, i) => columns[i % cols].push(p));
 
   function toggle<T>(set: Set<T>, value: T, apply: (next: Set<T>) => void) {

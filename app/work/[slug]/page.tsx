@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
-import { getProject, projects, stagesEngaged } from '@/content/projects';
+import { getProject, publishedProjects, stagesEngaged } from '@/content/projects';
 import ServiceMark, { SERVICE } from '@/components/ServiceMark';
 import StageRail from '@/components/StageRail';
 import SystemDiagram from '@/components/SystemDiagram';
@@ -12,7 +12,7 @@ import Plate from '@/components/Plate';
 export const dynamicParams = false;
 
 export function generateStaticParams() {
-  return projects.map((p) => ({ slug: p.slug }));
+  return publishedProjects.map((p) => ({ slug: p.slug }));
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
@@ -27,8 +27,8 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
   const project = getProject(slug);
   if (!project) notFound();
 
-  const others = projects.filter((p) => p.slug !== project.slug);
-  const next = others.length ? others[projects.indexOf(project) % others.length] : null;
+  const others = publishedProjects.filter((p) => p.slug !== project.slug);
+  const next = others.length ? others[publishedProjects.indexOf(project) % others.length] : null;
   const hero = project.hero;
 
   return (
