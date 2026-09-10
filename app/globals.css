@@ -282,26 +282,26 @@ figure { margin: 0; }
 }
 
 /* interim home ----------------------------------------------------------- */
-.hometop { padding: 92px 0 0; }
+.hometop { padding-block: 92px 0; }
 .eyebrow { color: var(--color-faint); }
 .opening { margin: 22px 0 0; font-size: clamp(2.2rem, 5.2vw, 4.25rem); line-height: 1.04; letter-spacing: -.026em; max-width: 20ch; text-wrap: balance; }
 .standfirst { margin: 28px 0 0; font-size: 1.1875rem; line-height: 1.65; color: var(--color-muted); max-width: 62ch; }
 
-.record { padding: 76px 0 0; }
+.record { padding-block: 76px 0; }
 .figures { display: flex; gap: 72px; margin: 20px 0 0; flex-wrap: wrap; border-top: 1px solid var(--color-ink); padding-top: 24px; }
 .figures div { display: flex; flex-direction: column; gap: 6px; }
 .fignum { font-family: var(--font-display); font-weight: 400; font-size: clamp(3rem, 7vw, 4.75rem); line-height: 1; letter-spacing: -.035em; }
 .figures dd { margin: 0; font-family: var(--font-ui); font-size: .9375rem; color: var(--color-muted); }
 .figcap { margin: 22px 0 0; font-family: var(--font-ui); font-size: .8125rem; line-height: 1.6; color: var(--color-muted); max-width: 64ch; }
 
-.routes { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; padding: 76px 0 0; }
+.routes { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; padding-block: 76px 0; }
 .routecard { display: flex; flex-direction: column; gap: 10px; border: 1px solid var(--color-hairline); border-radius: 10px; padding: 26px 24px 28px; transition: border-color .18s, transform .18s; }
 .routecard:hover { border-color: var(--color-ink); transform: translateY(-2px); }
 .routecard .k { color: var(--color-faint); }
 .routecard .t { font-family: var(--font-display); font-size: 1.4rem; line-height: 1.2; letter-spacing: -.015em; }
 .routecard .d { font-size: .9375rem; line-height: 1.55; color: var(--color-muted); }
 
-.startline { display: flex; justify-content: space-between; align-items: flex-end; gap: 40px; flex-wrap: wrap; padding: 76px 0 104px; }
+.startline { display: flex; justify-content: space-between; align-items: flex-end; gap: 40px; flex-wrap: wrap; padding-block: 76px 104px; }
 .startline p { margin: 0; font-size: 1.0625rem; line-height: 1.68; max-width: 60ch; }
 
 @media (max-width: 900px) { .routes { grid-template-columns: 1fr; } }
