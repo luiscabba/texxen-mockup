@@ -1,26 +1,49 @@
+'use client';
+
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 
 /**
- * Three column grid: links left, wordmark centred with the descriptor beneath,
- * links plus the single call to action right. The Sitemap2 bar is systems,
- * products, pipeline, services, work, company. Only routes that exist are
- * rendered: a dead nav link is worse than a missing one, and each goes back in
- * as its route lands. Security stays in the footer and on /company by design.
+ * The header exactly as every Applications board draws it: six links left in
+ * muted, the active one in ink with a hairline under it; the wordmark centred
+ * at 48px with the descriptor beneath; one call to action right.
+ *
+ * All six render whether or not the route is built, because that is what the
+ * boards specify. Unbuilt routes are not linked, so nothing 404s.
  */
+const NAV = [
+  { label: 'systems', href: null },
+  { label: 'products', href: null },
+  { label: 'pipeline', href: '/pipeline/' },
+  { label: 'services', href: '/services/' },
+  { label: 'work', href: null },
+  { label: 'company', href: '/company/' },
+];
+
 export default function SiteHeader() {
+  const path = usePathname();
+
   return (
     <div className="wrap">
       <nav className="sitenav">
         <div className="left t-ui">
-          <Link href="/pipeline/" className="navlink">pipeline</Link>
-          <Link href="/services/" className="navlink">services</Link>
+          {NAV.map((n) => {
+            const on = n.href && path.startsWith(n.href.replace(/\/$/, ''));
+            const cls = `navlink${on ? ' on' : ''}`;
+            return n.href ? (
+              <Link key={n.label} href={n.href} className={cls} aria-current={on ? 'page' : undefined}>
+                {n.label}
+              </Link>
+            ) : (
+              <span key={n.label} className="navlink">{n.label}</span>
+            );
+          })}
         </div>
         <Link href="/" className="markblock" aria-label="texxen, home">
           <span className="t-mark wordmark">texxen</span>
           <span className="descriptor t-meta">Design. Build. Operate</span>
         </Link>
         <div className="right t-ui">
-          <Link href="/company/" className="navlink">company</Link>
           <a href="mailto:luiscabmadrid@gmail.com?subject=Starting%20the%20pipeline" className="cta">
             start the pipeline
           </a>

@@ -1,16 +1,8 @@
 import type { Metadata } from 'next';
-import Link from 'next/link';
 
 /**
- * /company. Neutral throughout: no hue on this route (entry 23 as applied to
- * the Company board). It carries what a procuring entity or a vendor-risk
- * reader needs to classify texxen.
- *
- * Deliberately not published yet, because none of it is settled: the
- * registered name, registration number, TIN and year (no placeholder goes on
- * the page that a risk reader is reading for exactly those fields), Julius
- * Tuliao's title, the continuity statement (downstream of the institutional
- * operated terms, question 4), and the four portraits.
+ * /company, built from the Applications board of the same name. Neutral
+ * throughout, bracketed where the board brackets.
  */
 
 export const metadata: Metadata = {
@@ -18,88 +10,139 @@ export const metadata: Metadata = {
   description: 'texxen. Registered in Makati. Who is accountable, and the group it belongs to.',
 };
 
-const PEOPLE = [
-  { name: 'Ian Madrid', role: 'Founder. Owns allocation: which accounts are staffed, and how.' },
-  { name: 'Khalid Punzalan', role: 'Enterprise Architect' },
-  { name: 'Paul Ador', role: 'IT and Infrastructure Specialist' },
-]
-
-// Julius Tuliao is held back until his title is confirmed. A name with no role
-// on the page a risk reader opens to check accountability reads as an omission,
-// which is worse than waiting a day for the title.;
+const PEOPLE: [string, string, boolean][] = [
+  ['Ian Madrid', 'Founder. Owns allocation: which accounts are staffed, and how.', false],
+  ['Julius Tuliao', '[title]', true],
+  ['Khalid Punzalan', 'Enterprise Architect', false],
+  ['Paul Ador', 'IT and Infrastructure Specialist', false],
+];
 
 export default function Company() {
   return (
-    <>
-      <section className="phead art">
-        <h1>texxen. Registered in Makati. Accountable by name.</h1>
-        <p className="dek" style={{ maxWidth: '54ch' }}>
-          What a procuring entity or a vendor-risk reader needs to classify texxen: the address,
-          the people accountable, and the group it belongs to.
+    <div className="art">
+      <section className="routetop">
+        <h1 className="boardh1" style={{ maxWidth: '22ch' }}>
+          texxen. Registered in Makati. Accountable by name.
+        </h1>
+        <p className="boarddek">
+          The company page carries what a procuring entity or a vendor-risk reader needs to classify
+          texxen: registration, address, the people accountable, the group it belongs to, and what
+          happens if it cannot continue.
         </p>
       </section>
 
-      <section className="art block">
-        <h2 className="blockhead">What texxen does, in one paragraph</h2>
-        <p className="bodyp" style={{ fontSize: '1.1875rem' }}>
-          For banks, lenders and public-sector collecting entities whose recovery depends on systems
-          assembled from parts nobody owns end to end, texxen runs the pipeline from diagnosis
-          through to operating. The systems it built are in production across three countries&rsquo;
-          operations today.
-        </p>
-      </section>
-
-      <section className="art block">
-        <h2 className="blockhead">Address</h2>
-        <p className="bodyp">
-          17th Floor Chatham House, Rufino St., Salcedo Village, Makati City 1226, Philippines.
-        </p>
-        <p className="groupnote" style={{ marginTop: 20 }}>
-          Registered name, registration number and tax identification are in the document set, on
-          request.
-        </p>
-      </section>
-
-      <section className="art block">
-        <h2 className="blockhead">Who is accountable</h2>
-        <ul className="people">
-          {PEOPLE.map((p) => (
-            <li key={p.name}>
-              <span className="pn">{p.name}</span>
-              {p.role ? <span className="pr">{p.role}</span> : null}
-            </li>
-          ))}
-        </ul>
-      </section>
-
-      <section className="art block">
-        <h2 className="blockhead">The group</h2>
-        <div className="twoup">
-          <div className="wrapitem">
-            <h3>texxen</h3>
-            <p>
-              Operates systems. Diagnoses, designs, builds, launches and runs them, and is S.P.
-              Madrid&rsquo;s delivery for its own.
-            </p>
+      <section className="sec">
+        <div className="g3">
+          <div>
+            <h2 className="sechead">Registration</h2>
+            <dl className="reg">
+              <dt>Registered name</dt>
+              <dd className="brk">[registered name]</dd>
+              <dt>Registration</dt>
+              <dd className="brk">[registration number]</dd>
+              <dt>Tax identification</dt>
+              <dd className="brk">[TIN]</dd>
+              <dt>Registered since</dt>
+              <dd className="brk">[year]</dd>
+              <dt>Address</dt>
+              <dd>17th Floor Chatham House, Rufino St., Salcedo Village, Makati City 1226</dd>
+            </dl>
           </div>
-          <div className="wrapitem">
-            <h3>S.P. Madrid</h3>
-            <p>
-              Operates people. A collections business across eight service lines, in the
-              Philippines, Dubai and Singapore, under regulatory constraint.
+
+          <div>
+            <h2 className="sechead">Who is accountable</h2>
+            <ul className="who4">
+              {PEOPLE.map(([name, role, bracket]) => (
+                <li key={name}>
+                  <div className="n">{name}</div>
+                  <div className={`r${bracket ? ' brk' : ''}`}>{role}</div>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div>
+            <h2 className="sechead">What texxen does, in one paragraph</h2>
+            <p className="bcap" style={{ fontSize: 14 }}>
+              For banks, lenders and public-sector collecting entities whose recovery depends on
+              systems assembled from parts nobody owns end to end, texxen runs the pipeline from
+              diagnosis through to operating. The systems it built are in production across three
+              countries’ operations today.
+            </p>
+            <p className="bcap-s brk" style={{ marginTop: 14 }}>
+              [boilerplate, both lengths, downstream of the statement]
             </p>
           </div>
         </div>
-        <p className="bodyp" style={{ marginTop: 26 }}>
-          Two halves of one group, and each is the other&rsquo;s capability. The relationship is a
-          related-party fact and is stated wherever the operating record appears. Group capacity is
-          not used on regulated accounts, which are staffed by texxen directly. The outsourced
-          customer experience offer belongs to S.P. Madrid and is not texxen&rsquo;s to sell.
-        </p>
-        <p className="bodyp" style={{ marginTop: 18 }}>
-          <Link href="/pipeline/" className="footlink">how the work runs</Link>
+      </section>
+
+      <section className="sec">
+        <div className="g2" style={{ gridTemplateColumns: '1.2fr 1fr' }}>
+          <div>
+            <h2 className="sechead">The group</h2>
+            <div className="g2" style={{ gridTemplateColumns: '1fr 1fr', gap: 34 }}>
+              <div>
+                <div className="t-mark" style={{ fontSize: 30, lineHeight: 1 }}>texxen</div>
+                <p className="bcap-s" style={{ marginTop: 10 }}>
+                  Operates systems. Diagnoses, designs, builds, launches and runs them, and is
+                  S.P. Madrid’s delivery for its own.
+                </p>
+              </div>
+              <div>
+                <div className="t-disp" style={{ fontSize: 26, lineHeight: 1.1 }}>S.P. Madrid</div>
+                <p className="bcap-s" style={{ marginTop: 10 }}>
+                  Operates people. A collections business across eight service lines, in the
+                  Philippines, Dubai and Singapore, under regulatory constraint.
+                </p>
+              </div>
+            </div>
+            <p className="bcap" style={{ marginTop: 24 }}>
+              Two halves of one group, and each is the other’s capability. The relationship is a
+              related-party fact and is stated wherever the operating record appears. Group capacity
+              is not used on regulated accounts, which are staffed by texxen directly. The
+              outsourced customer experience offer belongs to S.P. Madrid and is not texxen’s to
+              sell.
+            </p>
+          </div>
+
+          <div>
+            <h2 className="sechead">If texxen cannot continue</h2>
+            <p className="bcap brk">
+              [continuity statement: what happens to a running account, who holds the code and
+              credentials, that a deployed product already runs in the institution’s own account and
+              stays there, how escrow releases, and the notice period on exit]
+            </p>
+            <p className="bcap-s" style={{ marginTop: 14 }}>
+              Downstream of the operated terms for institutional contracting, question 4. The
+              sentence “you will not outgrow us” depends on an exit that functions, so it is written
+              here rather than implied.
+            </p>
+            <div style={{ display: 'flex', gap: 24, marginTop: 20, flexWrap: 'wrap' }}>
+              <span className="tlink brk">security and the document set</span>
+              <span className="tlink brk">the twelve systems</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="sec" style={{ paddingBottom: 80 }}>
+        <h2 className="sechead">The people, at work</h2>
+        <div className="portraits">
+          {PEOPLE.map(([name]) => (
+            <figure key={name} style={{ margin: 0 }}>
+              <div className="slot">
+                <span className="t-meta brk" style={{ fontSize: 11 }}>4:5</span>
+              </div>
+              <figcaption className="nm">{name}</figcaption>
+            </figure>
+          ))}
+        </div>
+        <p className="bcap-s" style={{ marginTop: 16 }}>
+          Unposed, at work, eye level. Consent is already held for all four. This is the only route
+          where people lead, because it is the only route where a reader is assessing whether they
+          exist.
         </p>
       </section>
-    </>
+    </div>
   );
 }
