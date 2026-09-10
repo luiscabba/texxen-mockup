@@ -15,7 +15,7 @@ export type Slide = {
   line: string;
   /** Under the name: production status and where it runs. */
   status: string;
-  /** The cover image slot. Bracketed until the capture is placed. */
+  /** The cover image on the first screen. One place to swap it. */
   cover: { src?: string; caption: string };
   /** Travels with every slide, never with the set. */
   disclosure: string;
@@ -28,8 +28,9 @@ export const slides: Slide[] = [
     line: 'The field data collection infrastructure a credit investigation operation runs on.',
     status: 'In production since [year] · PH, Dubai, Singapore',
     cover: {
-      src: '/studies/openci/cap-map-national.jpg',
-      caption: '835 of the 978 field agents, live on the map. Staging environment, mock data.',
+      // Swappable: this is the only place the first screen's image is named.
+      src: '/studies/openci/openci-hero.jpg',
+      caption: 'OpenCI, the product’s own front door.',
     },
     disclosure:
       'Built for and run at S.P. Madrid, in the same group. Related party. Every cover on this carousel is the same operation, so the line travels with every slide, not with the set.',
