@@ -437,7 +437,7 @@ figure { margin: 0; }
 .crumb .sep { color: var(--color-faint); }
 .idblock { padding-top: 34px; }
 .studyname { margin: 0; font-family: var(--font-display); font-weight: 400; font-size: 62px; line-height: 1.02; letter-spacing: -.03em; }
-.studylede { margin: 22px 0 0; font-size: 21px; line-height: 1.5; color: var(--color-muted); max-width: 46ch; }
+.studylede { margin: 22px 0 0; font-size: 21px; line-height: 1.5; color: var(--color-muted); max-width: 64ch; }
 /* The at-a-glance figure, sitting under the figure it counts. A three part
    stack rather than a row: the number, what it counts, then the qualifier.
    Held to the figure's own measure so it reads as part of the plate. */
@@ -454,20 +454,22 @@ figure { margin: 0; }
 .studysec { padding-top: 72px; }
 .studysec-h { display: flex; gap: 14px; align-items: baseline; color: var(--color-muted); border-bottom: 1px solid var(--color-hairline); padding-bottom: 12px; }
 .studysec-h .sn { color: var(--color-faint); }
-.pull { margin: 30px 0 0; font-family: var(--font-display); font-weight: 400; font-size: 36px; line-height: 1.14; letter-spacing: -.022em; max-width: 24ch; }
+.pull { margin: 30px 0 0; font-family: var(--font-display); font-weight: 400; font-size: 36px; line-height: 1.14; letter-spacing: -.022em; max-width: 34ch; }
 /* One reading column so a figure can sit full width between paragraphs,
-   rather than being trapped in a text column. */
+   rather than being trapped in a text column. Text runs the same width as
+   the figures (11 September): the 68ch cap left the right third of the
+   1120 container empty on a desktop while every figure filled it. */
 .prose { margin-top: 26px; }
-.prose p { margin: 0 0 1.15em; font-size: 17px; line-height: 1.68; max-width: 68ch; }
+.prose p { margin: 0 0 1.1em; font-size: 18px; line-height: 1.62; max-width: none; }
 .figrun { margin: 34px 0 38px; display: grid; gap: 20px; }
 .figrun.pair { grid-template-columns: 1fr 1fr; align-items: start; }
 .figrun.phones { grid-template-columns: 1.6fr 1fr 1fr; align-items: start; }
 .figrun figure { margin: 0; }
 .figrun img { width: 100%; height: auto; border: 1px solid var(--color-hairline); border-radius: 4px; background: var(--color-surface); }
-.figrun figcaption { margin-top: 10px; font-family: var(--font-ui); font-size: 12px; line-height: 1.55; color: var(--color-muted); max-width: 62ch; }
+.figrun figcaption { margin-top: 10px; font-family: var(--font-ui); font-size: 12px; line-height: 1.55; color: var(--color-muted); max-width: none; }
 .resband { background: var(--color-ink); color: var(--color-paper); margin-top: 84px; padding: 72px 0; }
-.resline { margin: 0; font-family: var(--font-display); font-weight: 400; font-size: 42px; line-height: 1.12; letter-spacing: -.025em; max-width: 22ch; }
-.resbody { margin: 24px 0 0; font-size: 16px; line-height: 1.65; max-width: 72ch; opacity: .82; }
+.resline { margin: 0; font-family: var(--font-display); font-weight: 400; font-size: 42px; line-height: 1.12; letter-spacing: -.025em; max-width: 30ch; }
+.resbody { margin: 24px 0 0; font-size: 17px; line-height: 1.62; max-width: none; opacity: .82; }
 .outcomes { border-top: 1px solid var(--color-ink); margin-top: 26px; }
 .outcomes li { display: grid; grid-template-columns: 280px minmax(0, 1fr) auto; gap: 16px 32px; align-items: baseline; padding: 22px 0; border-bottom: 1px solid var(--color-hairline); }
 .outcomes .v { font-family: var(--font-display); font-size: 40px; line-height: 1; letter-spacing: -.03em; }
@@ -479,6 +481,7 @@ figure { margin: 0; }
 @media (max-width: 760px) {
   .studyname { font-size: 38px; }
   .pull { font-size: 26px; }
+  .prose p { font-size: 17px; }
   .resline { font-size: 28px; }
   .outcomes li { grid-template-columns: 1fr; }
   .outcomes .w { white-space: normal; }
