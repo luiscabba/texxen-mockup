@@ -7,13 +7,13 @@ import StudyCard from '@/components/StudyCard';
 
 /**
  * /studies/[slug], built to the slot model on the project pages canvas:
- * header and breadcrumb, identity block, the front card, meta row, the
- * numbered narrative, an ink resolution band, then the outcome.
+ * header and breadcrumb, identity block, the front card, the numbered
+ * narrative, an ink resolution band, then the outcome.
  *
  * The front card replaced the at-a-glance panel on 10 September: one flooded
  * panel in the study's stage hue carrying the figure, the stages engaged and
- * the operating claim. Status came out of the meta row with it, since the
- * card's own line says the same thing.
+ * a summary. The meta row (role, surface, modules) came out on 11 September,
+ * since the card and the narrative already say the same things.
  *
  * The stage rail the template calls for is deliberately omitted (10
  * September): with no published week counts it was five equal bars and four
@@ -60,14 +60,6 @@ export default async function Study({ params }: { params: Promise<{ slug: string
 
         <StudyCard card={s.card} />
 
-        <section className="metarow">
-          {s.meta.map((m) => (
-            <div key={m.k}>
-              <dt className="t-meta">{m.k}</dt>
-              <dd>{m.v}</dd>
-            </div>
-          ))}
-        </section>
 
         {s.sections.map((sec) => (
           <section key={sec.n} className="studysec" id={`s-${sec.n}`}>

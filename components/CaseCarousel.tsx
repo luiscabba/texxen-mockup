@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { slides, productRail, record } from '@/content/caseStudies';
+import { slides, productRail } from '@/content/caseStudies';
 
 const DWELL = 7000;
 
@@ -11,8 +11,10 @@ const DWELL = 7000;
  * The first screen: the split layout, direction B.
  *
  * Two things the boards had are deliberately gone. The opening headline came
- * out, so the first claim on the page is the case study itself and the two
- * figures rather than a sentence about them. The section rail came out too: it
+ * out, so the first claim on the page is the case study itself rather than a
+ * sentence about it. The two figures and the related-party caption came out
+ * on 11 September; the group relationship is stated on /work, /company and in
+ * the footer instead. The section rail came out too: it
  * was six links to sections that mostly do not exist yet, and on a phone it
  * pushed everything below the fold before a reader saw anything.
  *
@@ -94,16 +96,6 @@ export default function CaseCarousel() {
           </h1>
           <p className="fline">{s.line}</p>
 
-          <dl className="ffigs">
-            <div>
-              <dt className="t-disp t-num">{record.systems}</dt>
-              <dd>systems in production</dd>
-            </div>
-            <div>
-              <dt className="t-disp t-num">{record.countries}</dt>
-              <dd>countries&rsquo; operations</dd>
-            </div>
-          </dl>
         </div>
       </div>
 
@@ -119,7 +111,6 @@ export default function CaseCarousel() {
         ))}
       </div>
 
-      <p className="bcap" style={{ fontSize: 13, margin: 0 }}>{s.disclosure}</p>
     </div>
   );
 }

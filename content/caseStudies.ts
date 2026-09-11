@@ -17,8 +17,6 @@ export type Slide = {
   status: string;
   /** The cover image on the first screen. One place to swap it. */
   cover: { src?: string; caption: string };
-  /** Travels with every slide, never with the set. */
-  disclosure: string;
   href?: string;
 };
 
@@ -32,8 +30,6 @@ export const slides: Slide[] = [
       src: '/studies/openci/openci-hero.jpg',
       caption: 'OpenCI, the product’s own front door.',
     },
-    disclosure:
-      'Built for and run at S.P. Madrid, in the same group. Related party. Every cover on this carousel is the same operation, so the line travels with every slide, not with the set.',
     href: '/studies/openci/',
   },
 ];
@@ -47,6 +43,3 @@ export const productRail: { name: string; bracket?: boolean }[] = [
   { name: '[product]', bracket: true },
   { name: '[product]', bracket: true },
 ];
-
-/** The two figures in the caption. */
-export const record = { systems: 12, countries: 3 };

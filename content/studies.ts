@@ -29,27 +29,22 @@ export type Study = {
   /** One sentence of standfirst, never two. */
   standfirst: string;
   /**
-   * The front card. One dominant figure, up to two supporting ones, and the
-   * fields the reference card cannot carry: the stages engaged and the fact
-   * that texxen still operates it.
+   * The front card. One dominant figure, the stages engaged, one paragraph of
+   * summary and the service lines. Everything on it runs full width.
    */
   card: {
     sector: string;
     countries: string;
     figure: string;
     figureLabel: string;
-    support: { value: string; label: string }[];
     /** Plain text, slash separated on the page. No colour: the ground has it. */
     stages: string[];
     running: string;
     lines: string[];
     summary: string;
-    relatedParty: string;
     /** Which stage hue the card takes. Operate for a study about running something. */
     hue: 'diagnose' | 'design' | 'build' | 'operate';
   };
-  /** Four fields, no more. */
-  meta: { k: string; v: string }[];
   sections: { n: string; title: string; pull?: string; blocks: Block[] }[];
   /** The ink band before the outcome. */
   resolution: { line: string; body: string };
@@ -70,24 +65,13 @@ export const studies: Study[] = [
       countries: 'Philippines, Dubai, Singapore',
       figure: '978',
       figureLabel: 'field agents working on the platform across S.P. Madrid operations',
-      support: [
-        { value: '835', label: 'carry live location tracking' },
-        { value: '1,642', label: 'hold a login: field, office, quality assurance, administration' },
-      ],
       stages: ['diagnose', 'design', 'build', 'launch', 'operate'],
       running: 'and running',
       lines: ['systems', 'intelligence'],
       summary:
         'S.P. Madrid runs credit investigation in the field, where the office cannot see it. texxen built the capture, the command center, the configurable form and report layer and the audit engine, in that order. The record now starts at the address rather than at the desk.',
-      relatedParty:
-        'S.P. Madrid is a company in the same group as texxen, and is stated as a related party.',
       hue: 'operate',
     },
-    meta: [
-      { k: 'Role', v: 'Designed, built and operated by texxen' },
-      { k: 'Surface', v: 'Mobile app for iOS and Android, and a web command center' },
-      { k: 'Modules', v: 'Field capture, command center, form and report builders, audit engine' },
-    ],
     sections: [
       {
         n: '01',
